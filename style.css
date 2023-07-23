@@ -61,6 +61,7 @@ button {
   max-height: 600px;
   max-width: 1000px;
   position: relative;
+  overflow: hidden;
   left: 0;
   top: 0;
 }
@@ -107,7 +108,7 @@ button {
   left: 0;
   top: 0;
   width: 1000px;
-  height: auto;
+  height: 600px;
   border-radius: 10px;
 }
 #motorbike {
@@ -129,6 +130,49 @@ button {
   font-size: 50px;
   font-weight: bold;
   position: absolute;
-  top: 50px;
-  left: 150px;
+  border-radius: 5px;
+  background-color: white;
+  top: 20%;
+  left: 50%;
+  margin-left: -250px;
+}
+#messageEnding {
+  font-size: 50px;
+  font-weight: bold;
+  position: absolute;
+  border-radius: 5px;
+  background-color: white;
+  top: 20%;
+  left: 50%;
+  margin-left: -150px;
+}
+.buttonReset {
+  font-size: 20px;
+  position: absolute;
+  border: 5px outset black;
+  top: 500px;
+  left: 450px;
+  background-color: white;
+  visibility: hidden;
+}
+.disabled {
+  pointer-events: none;
+}
+#gameEndWin {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 600px;
+  width: auto;
+  visibility: hidden;
+}
+#gameEndLose {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: gray;
+  border-radius: 10px;
+  height: 600px;
+  width: 1000px;
+  visibility: hidden;
 }

@@ -14,57 +14,82 @@ cSElement.style.fontSize = "80px";
 cSElement.style.padding = "20px";
 countComputer.appendChild(cSElement);
 
+let playerScore = 0;
+let computerScore = 0;
+
+function createEnding(source) {
+  const gifContainer = document.querySelector(source);
+  gifContainer.style.visibility = "visible";
+}
+function resetEnding(source) {
+  const gifContainer = document.querySelector(source);
+  gifContainer.style.visibility = "hidden";
+}
+function createEndingMessage(message) {
+  const messageEndingContainer = document.querySelector("#messageEnding");
+  messageEndingContainer.textContent = message;
+}
 function createMessage(message) {
   const messageContainer = document.querySelector("#message");
   messageContainer.textContent = message;
 }
+function createReset(message) {
+  const buttonContainer = document.querySelector("#resetButton");
+  buttonContainer.textContent = message;
+  if (message == "") {
+    buttonContainer.style.visibility = "hidden";
+  } else buttonContainer.style.visibility = "visible";
+}
 
-let playerScore = 0;
-let computerScore = 0;
-
+function upper(word) {
+  uppercase = word.toUpperCase();
+  return;
+}
+function move(image) {
+  let step = 120;
+  let position = document.getElementById(image).offsetLeft;
+  position -= step;
+  document.getElementById(image).style.left = position + "px";
+}
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection == computerSelection) {
+  if (playerSelection == "resetButton") {
+    reset();
+  } else if (playerSelection == computerSelection) {
     playerScore++;
     computerScore++;
     document.getElementById("playerCount").innerHTML = `${playerScore}`;
     document.getElementById("compCount").innerHTML = `${computerScore}`;
-    createMessage("It was a draw");
     move("motorbike");
     move("police");
+    createMessage("It was a draw");
     return;
   } else if (playerSelection == "rock" && computerSelection == "scissors") {
     playerScore++;
     document.getElementById("playerCount").innerHTML = `${playerScore}`;
     move("motorbike");
-    createMessage("You win! (rock beats scissors)");
+    createMessage("You Win! (rock > scissors)");
     return;
   } else if (playerSelection == "paper" && computerSelection == "rock") {
     playerScore++;
     document.getElementById("playerCount").innerHTML = `${playerScore}`;
-    createMessage("You win! (paper beats rock)");
     move("motorbike");
+    createMessage("You Win! (paper > rock)");
     return;
   } else if (playerSelection == "scissors" && computerSelection == "paper") {
     playerScore++;
     document.getElementById("playerCount").innerHTML = `${playerScore}`;
-    createMessage("You win! (scissors beats paper)");
     move("motorbike");
+    createMessage("You Win! (scissors > paper)");
     return;
   } else {
     computerScore++;
     document.getElementById("compCount").innerHTML = `${computerScore}`;
-    createMessage(
-      "You lose (" + computerSelection + " beats " + playerSelection + ")"
-    );
     move("police");
+    createMessage(
+      "You Lose! (" + computerSelection + " > " + playerSelection + ")"
+    );
     return;
   }
-}
-function move(image) {
-  let step = 100;
-  let position = document.getElementById(image).offsetLeft;
-  position -= step;
-  document.getElementById(image).style.left = position + "px";
 }
 function reset() {
   playerScore = 0;
@@ -74,15 +99,35 @@ function reset() {
   document.getElementById("motorbike").style.left = "500px";
   document.getElementById("police").style.left = "750px";
   createMessage("");
+  createReset("");
+  resetEnding("#gameEndWin");
+  resetEnding("#gameEndLose");
+  createEndingMessage("");
+  enableButtons();
+}
+function disableButtons() {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    if (button.id != "resetButton") button.classList.add("disabled");
+  });
+}
+function enableButtons() {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach((button) => {
+    if (button.id != "resetButton") button.classList.remove("disabled");
+  });
 }
 function gameEnd() {
   if (playerScore === 5) {
+    disableButtons();
     move("motorbike");
-    createMessage("You got away");
-    reset();
-  } else if (computerScore === 5 || computerScore == playerScore + 2) {
-    createMessage("You got caught");
-    reset();
+    createEnding("#gameEndWin");
+    createReset("Play Again");
+    createEndingMessage("You Escaped!");
+  } else if (computerScore === 5 || computerScore >= playerScore + 2) {
+    disableButtons();
+    createEnding("#gameEndLose");
+    createReset("Play Again");
   }
 }
 const buttons = document.querySelectorAll("button");
