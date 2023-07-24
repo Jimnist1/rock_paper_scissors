@@ -41,15 +41,39 @@ function createReset(message) {
   } else buttonContainer.style.visibility = "visible";
 }
 
-function upper(word) {
-  uppercase = word.toUpperCase();
-  return;
+function wheelie() {
+  const wheelieMoto = document.getElementById("motorbike");
+  wheelieMoto.style.transform = "rotate(10deg) scaleX(-1)";
+}
+function wheelieEnd() {
+  const wheelieMoto = document.getElementById("motorbike");
+  wheelieMoto.style.transform = "scaleX(-1)";
 }
 function move(image) {
+  if (image == "motorbike") {
+    wheelie();
+  }
   let step = 120;
   let position = document.getElementById(image).offsetLeft;
   position -= step;
   document.getElementById(image).style.left = position + "px";
+}
+
+function upper(word) {
+  uppercase = word.toUpperCase();
+  return;
+}
+function computerMath() {
+  return Math.floor(Math.random() * 3 + 1);
+}
+function getComputerChoice(computerResult) {
+  if (computerResult === 1) {
+    return "rock";
+  } else if (computerResult === 2) {
+    return "paper";
+  } else {
+    return "scissors";
+  }
 }
 function playRound(playerSelection, computerSelection) {
   if (playerSelection == "resetButton") {
@@ -91,6 +115,7 @@ function playRound(playerSelection, computerSelection) {
     return;
   }
 }
+
 function reset() {
   playerScore = 0;
   computerScore = 0;
@@ -104,6 +129,7 @@ function reset() {
   resetEnding("#gameEndLose");
   createEndingMessage("");
   enableButtons();
+  wheelieEnd();
 }
 function disableButtons() {
   const buttons = document.querySelectorAll("button");
@@ -117,6 +143,7 @@ function enableButtons() {
     if (button.id != "resetButton") button.classList.remove("disabled");
   });
 }
+
 function gameEnd() {
   if (playerScore === 5) {
     disableButtons();
@@ -130,22 +157,12 @@ function gameEnd() {
     createReset("Play Again");
   }
 }
+
 const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    function computerMath() {
-      return Math.floor(Math.random() * 3 + 1);
-    }
+    computerMath();
     const computerNumber = computerMath();
-    function getComputerChoice(computerResult) {
-      if (computerResult === 1) {
-        return "rock";
-      } else if (computerResult === 2) {
-        return "paper";
-      } else {
-        return "scissors";
-      }
-    }
     playRound(button.id, getComputerChoice(computerNumber));
     gameEnd();
   });
