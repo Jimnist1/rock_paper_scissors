@@ -52,7 +52,7 @@ function wheelieEnd() {
 function move(image) {
   if (image == "motorbike") {
     wheelie();
-    setTimeout(wheelieEnd(), 2000);
+    setTimeout(wheelieEnd, 2000);
   }
   let step = 120;
   let position = document.getElementById(image).offsetLeft;
