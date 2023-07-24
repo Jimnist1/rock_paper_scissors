@@ -163,7 +163,7 @@ buttons.forEach((button) => {
     computerMath();
     const computerNumber = computerMath();
     playRound(button.id, getComputerChoice(computerNumber));
-    setTimeout(wheelieEnd(), 500);
+    setTimeout(wheelieEnd(), 2000);
     gameEnd();
   });
 });
