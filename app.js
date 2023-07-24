@@ -52,12 +52,12 @@ function wheelieEnd() {
 function move(image) {
   if (image == "motorbike") {
     wheelie();
-    setTimeout(wheelieEnd, 2000);
   }
   let step = 120;
   let position = document.getElementById(image).offsetLeft;
   position -= step;
   document.getElementById(image).style.left = position + "px";
+  setTimeout(wheelieEnd, 2000)
 }
 
 function upper(word) {
