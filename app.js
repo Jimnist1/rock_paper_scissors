@@ -44,6 +44,8 @@ function createReset(message) {
 function wheelie() {
   const wheelieMoto = document.getElementById("motorbike");
   wheelieMoto.style.transform = "rotate(10deg) scaleX(-1)";
+  wheelieMoto.style.transform.origin = "bottom right";
+  
 }
 function wheelieEnd() {
   const wheelieMoto = document.getElementById("motorbike");
