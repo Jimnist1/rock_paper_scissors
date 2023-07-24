@@ -57,7 +57,7 @@ function move(image) {
   let position = document.getElementById(image).offsetLeft;
   position -= step;
   document.getElementById(image).style.left = position + "px";
-  setTimeout(wheelieEnd, 2000)
+  setTimeout(wheelieEnd, 2000);
 }
 
 function upper(word) {
