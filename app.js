@@ -57,7 +57,6 @@ function move(image) {
   let position = document.getElementById(image).offsetLeft;
   position -= step;
   document.getElementById(image).style.left = position + "px";
-  setTimeout(wheelieEnd, 2000);
 }
 
 function upper(word) {
@@ -164,6 +163,7 @@ buttons.forEach((button) => {
     computerMath();
     const computerNumber = computerMath();
     playRound(button.id, getComputerChoice(computerNumber));
+    setTimeout(wheelieEnd, 1000);
     gameEnd();
   });
 });
