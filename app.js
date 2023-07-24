@@ -57,6 +57,7 @@ function move(image) {
   let position = document.getElementById(image).offsetLeft;
   position -= step;
   document.getElementById(image).style.left = position + "px";
+  setTimeout(wheelieEnd(), 500);
 }
 
 function upper(word) {
@@ -129,7 +130,6 @@ function reset() {
   resetEnding("#gameEndLose");
   createEndingMessage("");
   enableButtons();
-  wheelieEnd();
 }
 function disableButtons() {
   const buttons = document.querySelectorAll("button");
