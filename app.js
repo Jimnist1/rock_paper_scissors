@@ -1,19 +1,3 @@
-const countPlayer = document.querySelector(".player");
-const pSElement = document.createElement("div");
-pSElement.setAttribute("id", "playerCount");
-pSElement.textContent = 0;
-pSElement.style.fontSize = "80px";
-pSElement.style.padding = "20px";
-countPlayer.appendChild(pSElement);
-
-const countComputer = document.querySelector(".comp");
-const cSElement = document.createElement("div");
-cSElement.setAttribute("id", "compCount");
-cSElement.textContent = 0;
-cSElement.style.fontSize = "80px";
-cSElement.style.padding = "20px";
-countComputer.appendChild(cSElement);
-
 let playerScore = 0;
 let computerScore = 0;
 
@@ -45,15 +29,20 @@ function wheelie() {
   const wheelieMoto = document.getElementById("motorbike");
   wheelieMoto.style.transform = "rotate(10deg) scaleX(-1)";
   wheelieMoto.style.transform.origin = "bottom right";
-  
 }
 function wheelieEnd() {
   const wheelieMoto = document.getElementById("motorbike");
   wheelieMoto.style.transform = "scaleX(-1)";
 }
+function playAudio(sound) {
+  let mySound = new Audio(sound);
+  mySound.volume = 0.1;
+  mySound.play();
+}
 function move(image) {
   if (image == "motorbike") {
     wheelie();
+    playAudio("sounds/motorbike.mp3");
   }
   let step = 120;
   let position = document.getElementById(image).offsetLeft;
@@ -84,33 +73,33 @@ function playRound(playerSelection, computerSelection) {
   } else if (playerSelection == computerSelection) {
     playerScore++;
     computerScore++;
-    document.getElementById("playerCount").innerHTML = `${playerScore}`;
-    document.getElementById("compCount").innerHTML = `${computerScore}`;
+    document.getElementById("playerCount").textContent = `${playerScore}`;
+    document.getElementById("compCount").textContent = `${computerScore}`;
     move("motorbike");
     move("police");
     createMessage("It was a draw");
     return;
   } else if (playerSelection == "rock" && computerSelection == "scissors") {
     playerScore++;
-    document.getElementById("playerCount").innerHTML = `${playerScore}`;
+    document.getElementById("playerCount").textContent = `${playerScore}`;
     move("motorbike");
     createMessage("You Win! (rock > scissors)");
     return;
   } else if (playerSelection == "paper" && computerSelection == "rock") {
     playerScore++;
-    document.getElementById("playerCount").innerHTML = `${playerScore}`;
+    document.getElementById("playerCount").textContent = `${playerScore}`;
     move("motorbike");
     createMessage("You Win! (paper > rock)");
     return;
   } else if (playerSelection == "scissors" && computerSelection == "paper") {
     playerScore++;
-    document.getElementById("playerCount").innerHTML = `${playerScore}`;
+    document.getElementById("playerCount").textContent = `${playerScore}`;
     move("motorbike");
     createMessage("You Win! (scissors > paper)");
     return;
   } else {
     computerScore++;
-    document.getElementById("compCount").innerHTML = `${computerScore}`;
+    document.getElementById("compCount").textContent = `${computerScore}`;
     move("police");
     createMessage(
       "You Lose! (" + computerSelection + " > " + playerSelection + ")"
@@ -122,8 +111,8 @@ function playRound(playerSelection, computerSelection) {
 function reset() {
   playerScore = 0;
   computerScore = 0;
-  document.getElementById("compCount").innerHTML = `${computerScore}`;
-  document.getElementById("playerCount").innerHTML = `${playerScore}`;
+  document.getElementById("compCount").textContent = `${computerScore}`;
+  document.getElementById("playerCount").textContent = `${playerScore}`;
   document.getElementById("motorbike").style.left = "500px";
   document.getElementById("police").style.left = "750px";
   createMessage("");
